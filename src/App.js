@@ -1,21 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
-import Button from './components/Button';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import { publicRoutes } from '~/routes';
+import Following from './pages/Following';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import DefaultLayout from './components/Layout/DeFaultLayout';
+import Upload from './pages/Upload';
+import Header from './components/Layout/components/Header';
 
 function App() {
   return (
-    <div className="App">
-      <Button />
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <DefaultLayout>
+                <Home />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="/following"
+            element={
+              <DefaultLayout>
+                <Following />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <DefaultLayout>
+                <Profile />
+              </DefaultLayout>
+            }
+          />
+          <Route
+            path="upload"
+            element={
+              <>
+                <Header />
+                <Upload />
+              </>
+            }
+          />
+
+          {/* {publicRoutes.map((route, index) => {
+            const Page = route.component;
+            return <Route key={index} path={route.path} element={<Page />} />;
+          })} */}
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
